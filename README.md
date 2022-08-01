@@ -97,4 +97,4 @@ await Promise.all(
     users.map(async user => {
         await user.destroy()
     })
-)
+)# tugas-rizka
