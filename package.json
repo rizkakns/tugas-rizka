@@ -1,0 +1,31 @@
+{
+  "name": "platypus",
+  "version": "1.0.0",
+  "description": "Perpustakaan Online",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js",
+    "start": "node index.js",
+    "db:create": "sequelize-cli db:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:g:migration": "sequelize-cli migration:generate --name",
+    "db:reset": "sequelize-cli db:drop && sequelize-cli db:create && sequelize-cli db:migrate"
+  },
+  "keywords": [
+    "perpustakaan"
+  ],
+  "author": "Saefulloh Maslul",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "date-fns": "^2.29.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "sequelize-cli": "^6.4.1"
+  }
+}
