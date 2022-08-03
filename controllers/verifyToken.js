@@ -48,12 +48,9 @@ const register = async (req, res, next) => {
                 email: bodies.email,
                 password: hasedPassword,
                 name: bodies.name,
-                phone: bodies.phone,
-                address: bodies.address,
-                status: bodies.status,
                 role_id: isRoleExist.id
             }, {
-                transactions: trx
+                transaction: trx
             })
         })
 
@@ -61,13 +58,8 @@ const register = async (req, res, next) => {
             code: 200,
             message: 'Success create user',
             data: {
-                email: bodies.email,
-                password: hasedPassword,
-                name: bodies.name,
-                phone: bodies.phone,
-                address: bodies.address,
-                status: bodies.status,
-                role_id: isRoleExist.id
+                name: user.name,
+                email: user.email
             }
         })
     } catch (error) {
@@ -75,46 +67,6 @@ const register = async (req, res, next) => {
     }    
 }
 
-const login = async(req, res, next) => {
-    try {
-        const bodies = req.body
-
-        const isUserExist = await Users.findOne({
-            where: {
-                email: bodies.email,
-
-            },
-            attributes: ['password', 'id'],
-
-        })
-        if (!isUserExist) {
-            throw {
-                code: 400,
-                message: "user not found"
-            }
-        }
-        const passcompare = await bcrypt.compare(bodies.password, isUserExist.password)
-
-        if (!passcompare) {
-            throw {
-                code: 400,
-                message: "incorrect password"
-            }
-        }
-
-        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 60 * 60, id: isUserExist.id }, process.env.SECRETKEY)
-        res.header('auth-token', token).json({
-            token: token
-        })
-
-        return res.status(200).json({
-            code: 200,
-            message: "success"
-
-        })
-    } catch (error) {
-        next(error)
-    }
+module.exports = {
+    register
 }
-
-module.exports = { register, login }
