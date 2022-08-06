@@ -38,7 +38,7 @@ const Order = async(req, res, next) => {
         })
 
         if (!orderExist) {
-            const order = await Order.create({
+            const Order = await Order.create({
                 invoice: Math.floor(Math.random() * 1000000000),
                 name: isItemsExist.name,
                 users_id: decode.id,
