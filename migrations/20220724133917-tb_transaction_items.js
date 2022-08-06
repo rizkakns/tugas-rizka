@@ -52,3 +52,4 @@ module.exports = {
     await queryInterface.dropTable('transaction_items');
   }
 };
+s
